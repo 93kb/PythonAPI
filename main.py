@@ -12,4 +12,6 @@ async def ZipCode(zipcode:int = 0):
 """
 とりあえず　https://qiita.com/thithi7110/items/c1b01798e69ddc31206b
 のままに作って実行したけど動かない　なんで？
+
+ParameterQueryに値を設定してGET ⇒　どこ？
 """
