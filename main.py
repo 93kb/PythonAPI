@@ -15,3 +15,4 @@ async def ZipCode(zipcode:int = 0):
 
 ParameterQueryに値を設定してGET ⇒　どこ？
 """
+
