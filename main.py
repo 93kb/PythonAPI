@@ -1,18 +1,51 @@
-import requests,json
-from fastapi import FastAPI
-app = FastAPI()
+#WebAPIの練習
+#必要なライブラリをインポート
+import requests #HTTPリクエストを送るためのライブラリ
+import  json #JSONデータを送るためのライブラリ
 
-@app.get("/zipcode")
-async def ZipCode(zipcode:int = 0):
-    url = f'https://zipcloud.ibsnet.co.jp/api/search?zipcode={zipcode}'
-    r = requests.get(url)
-    print(r.text)
-    return {"message":   json.loads(r.text)}
+#郵便番号APIのURLを指定
+#郵便番号「7830060」で検索する場合
+#https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060
 
-"""
-とりあえず　https://qiita.com/thithi7110/items/c1b01798e69ddc31206b
-のままに作って実行したけど動かない　なんで？
+#APIを変数に格納
+url = "https://zipcloud.ibsnet.co.jp/api/search"
 
-ParameterQueryに値を設定してGET ⇒　どこ？
-"""
+#ユーザから郵便番号の入力を受け取る
+zip = input("郵便番号を入力=>")
 
+#APIに送るパラメータを準備
+#ユーザが入力した郵便番号をパラメータへ設定
+param = {"zipcode":zip}
+
+#requests.get()関数を使用して
+#APIにHTTP GETリクエストを送り、レスポンスがresに格納される
+res = requests.get(url,param)
+
+#res.textに格納されているJSON形式のレスポンスデータを
+#Pythonの辞書型データに変換
+data = json.loads(res.text)
+
+#変換したデータを出力
+print(data)
+
+#見やすくするための区切り
+print('*' * 50)
+
+#レスポンスデータから必要な情報を抽出
+if data['results'] is not None:
+    #resultsリストの最初の要素から住所情報を取得
+    address_info = data['results'][0]
+    
+    #郵便番号
+    zipcode = address_info['zipcode']
+    
+    #住所を組み立て
+    address = f"{address_info['address1']}{address_info['address2']}{address_info['address3']}"
+    
+    #整形して表示
+    print(f"郵便番号：{zipcode} 住所：{address}")
+else:
+    print("住所情報が見つかりませんでした。")
+    
+    
+#
