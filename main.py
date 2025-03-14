@@ -9,7 +9,7 @@ from google import genai
 app = FastAPI()
 
 #APIを変数に格納
-url ="https://gemini.google.com/app/eaa06e0fef9b45b1?hl=ja"
+url ="https://gemini.google.com/app?hl=ja"
 
 client = genai.Client(api_key="YOUR_API_KEY")
 
@@ -20,7 +20,7 @@ response = requests.get()
 async def get_main(contents:str):
     response = client.models.generate_content(
     model="gemini-2.0-flash",
-    contents="Explain how AI works",
+    contents="Explain how AI works"
 )
 
     return response.json
