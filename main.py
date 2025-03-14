@@ -24,3 +24,5 @@ async def get_main(contents:str):
 )
 
     return response.json
+
+print(response.text)
