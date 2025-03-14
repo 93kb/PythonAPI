@@ -14,7 +14,7 @@ url ="https://gemini.google.com/app?hl=ja"
 client = genai.Client(api_key="YOUR_API_KEY")
 
 # リクエストを送信
-response = requests.get()
+#response = requests.get()
 
 @app.get("/")
 async def get_main(contents:str):
@@ -23,6 +23,4 @@ async def get_main(contents:str):
     contents="Explain how AI works"
 )
 
-    return response.json
-
-print(response.text)
+    return response
