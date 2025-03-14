@@ -15,7 +15,7 @@ class Item(BaseModel):
 async def get_main(item: Item):
     
     #APIを変数に格納
-    client = genai.Client(api_key="AIzaSyCBup7yN4FHSt69k-m20vHTrLfdJvwzkpA")
+    client = genai.Client(api_key="YOUR_API_KEY") #取得したAPIキーを設定する
 
     try:
         response = client.models.generate_content(

@@ -11,7 +11,7 @@ app = FastAPI()
 #APIを変数に格納
 url ="https://gemini.google.com/app/eaa06e0fef9b45b1?hl=ja"
 
-client = genai.Client(api_key="YOUR_API_KEY")
+client = genai.Client(api_key="YOUR_API_KEY") 
 
 # リクエストを送信
 #response = requests.get()
