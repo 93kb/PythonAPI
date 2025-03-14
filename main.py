@@ -1,27 +1,29 @@
 #FastAPIからGeminiAPIを呼び出したい
 
-import requests #HTTPリクエストを送るためのライブラリ
 from fastapi import FastAPI
-import  json #JSONデータを送るためのライブラリ
 from google import genai
+from pydantic import BaseModel
 
 # FastAPIのインスタンスを作成
 app = FastAPI()
 
-#APIを変数に格納
-url ="https://gemini.google.com/app/eaa06e0fef9b45b1?hl=ja"
+class Item(BaseModel):
+    contents: str
 
-client = genai.Client(api_key="YOUR_API_KEY")
+@app.post("/")
 
-# リクエストを送信
-#response = requests.get()
+async def get_main(item: Item):
+    
+    #APIを変数に格納
+    client = genai.Client(api_key="AIzaSyCBup7yN4FHSt69k-m20vHTrLfdJvwzkpA")
 
-@app.get("/")
-async def get_main(contents:str):
-    response = client.models.generate_content(
-    model="gemini-2.0-flash",
-    contents="Explain how AI works"
-)
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=item.contents
+        )
+
+    except:
+        return "error"
 
     return response
-
